@@ -25,6 +25,6 @@ D2=$(printf "%02d" $DAY)
 echo "getting puzzle input for year $YR day $D2"
 
 (
-UA="https://github.com/eduellery/aoc-2016"
+UA="https://github.com/eduellery/aoc-2017"
 curl -s https://adventofcode.com/$YR/day/$DAY/input --cookie "session=$AOC_SESSION" -H "User-Agent: $UA"
-) | awk 'NR>1{print PREV} {PREV=$0} END{printf("%s",$0)}' > code/src/test/resources/day$D2.in
+) | awk 'NR>1{print PREV} {PREV=$0} END{printf("%s",$0)}' > ./code/src/test/resources/day$D2.in
