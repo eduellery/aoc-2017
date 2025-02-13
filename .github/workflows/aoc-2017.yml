@@ -25,7 +25,19 @@ jobs:
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
     - name: Get files
-      run: for i in {1..25}; do ./get_input.sh $i; done
+      run: |
+        pwd
+        cd code
+        ls
+        cd src
+        ls
+        cd test
+        ls
+        cd resources
+        ls
+        cd ../../../..
+        for i in {1..25}; do ./get_input.sh $i; done
+        uv run pytest
       env:
           AOC_SESSION: ${{ secrets.AOC_SESSION }}
 
