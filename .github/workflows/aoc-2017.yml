@@ -45,6 +45,9 @@ jobs:
       run: |
         echo "Jacoco Coverage Report available at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts"
 
+    - name: Install xmllint
+      run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+
     - name: Extract Coverage Percentage
       run: |
         COVERAGE=$(xmllint --xpath "string(//report/counter[@type='INSTRUCTION']/@covered)" code/build/reports/jacoco/test/jacocoTestReport.xml)
