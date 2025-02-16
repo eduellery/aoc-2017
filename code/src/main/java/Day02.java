@@ -37,7 +37,7 @@ public record Day02(int part1, int part2) {
                         .filter(j -> j != i && j % i == 0)
                         .map(j -> j / i))
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("No evenly divisible pair found"));
+                .get();
     };
 
 }
