@@ -32,6 +32,27 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
+    - name: Run Tests and Generate Jacoco Report
+      run: ./gradlew jacocoTestReport
+
+    - name: Upload Jacoco Coverage Report as Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: jacoco-coverage-report
+        path: code/build/reports/jacoco/test/html
+
+    - name: Display Jacoco Coverage HTML Report Link
+      run: |
+        echo "Jacoco Coverage Report available at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts"
+
+    - name: Extract Coverage Percentage
+      run: |
+        COVERAGE=$(xmllint --xpath "string(//report/counter[@type='INSTRUCTION']/@covered)" code/build/reports/jacoco/test/jacocoTestReport.xml)
+        MISSED=$(xmllint --xpath "string(//report/counter[@type='INSTRUCTION']/@missed)" code/build/reports/jacoco/test/jacocoTestReport.xml)
+        TOTAL=$((COVERAGE + MISSED))
+        PERCENT=$((COVERAGE * 100 / TOTAL))
+        echo "COVERAGE_PERCENT = $PERCENT"
+
   dependency-submission:
 
     runs-on: ubuntu-latest
