@@ -24,4 +24,8 @@ public class Utils {
         return lines.get(0);
     }
 
+    public static int readLineAsInt(String fileName, Class<?> clazz) {
+        return Integer.valueOf(readLine(fileName, clazz));
+    }
+
 }
