@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.*;
 import java.nio.charset.*;
 import java.util.*;
+import java.util.stream.*;
 
 public class Utils {
 
@@ -24,8 +25,14 @@ public class Utils {
         return lines.get(0);
     }
 
+    public static List<Integer> readLinesAsInt(String fileName, Class<?> clazz) {
+        return readLines(fileName, clazz).stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
     public static int readLineAsInt(String fileName, Class<?> clazz) {
-        return Integer.valueOf(readLine(fileName, clazz));
+        return Integer.parseInt(readLine(fileName, clazz));
     }
 
 }
