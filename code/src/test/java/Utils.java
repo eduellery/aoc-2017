@@ -35,4 +35,10 @@ public class Utils {
         return Integer.parseInt(readLine(fileName, clazz));
     }
 
+    public static List<Integer> readLineAsIntList(String fileName, Class<?> clazz) {
+        return Arrays.stream(readLine(fileName, clazz).split("\\t"))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
 }

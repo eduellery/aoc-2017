@@ -22,8 +22,8 @@ public final class MathUtils {
      * @param y the y-coordinate
      * @return the Hexagonal Distance
      */
-    public static double getHexDistance(double x, double y) {
-        return (Math.abs(x) <= Math.abs(y)) ? Math.abs(x) + Math.abs(y) : 2 * Math.abs(x);
-    }
+//    public static double getHexDistance(double x, double y) {
+//        return (Math.abs(x) <= Math.abs(y)) ? Math.abs(x) + Math.abs(y) : 2 * Math.abs(x);
+//    }
 
 }
