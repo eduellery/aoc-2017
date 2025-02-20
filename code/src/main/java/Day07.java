@@ -42,23 +42,6 @@ public record Day07(String part1, int part2) {
         return new Day07(rootName, fixedValue(root));
     }
 
-    private static List<Integer> redistribute(List<Integer> values) {
-        var list = new ArrayList<>(values);
-        var index = IntStream.range(0, list.size())
-                        .boxed()
-                        .max(Comparator.comparing(list::get))
-                        .get();
-
-        var blocks = list.get(index);
-        list.set(index, 0);
-
-        for (int i = 1; i <= blocks; i++) {
-            list.set((index + i) % list.size(), list.get((index + i) % list.size()) + 1);
-        }
-
-        return List.copyOf(list);
-    }
-
     private static int fixedValue(Disc disc) {
         Disc grandpa = null, parent = null;
 
@@ -120,16 +103,6 @@ public record Day07(String part1, int part2) {
 
         public int getTotalWeight() {
             return weight + children.stream().mapToInt(Disc::getTotalWeight).sum();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return this == obj || (obj instanceof Disc d && name.equals(d.name));
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(name);
         }
     }
 }
