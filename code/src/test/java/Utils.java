@@ -41,4 +41,8 @@ public class Utils {
                 .collect(Collectors.toList());
     }
 
+    public static List<String> readLineAsStringList(String fileName, Class<?> clazz) {
+        return Arrays.asList(readLine(fileName, clazz).split(","));
+    }
+
 }
