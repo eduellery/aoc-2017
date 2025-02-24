@@ -45,13 +45,6 @@ class Day09Test {
         assertEquals(expected, day.part1());
     }
 
-    @Test
-    void testSolutionPart1() {
-        String input = Utils.readLine(inputFile, Day09Test.class);
-        Day09 day = Day09.fromValues(input);
-        assertEquals(17390, day.part1());
-    }
-
     @ParameterizedTest
     @MethodSource("provideExamplesPart2")
     void testExamplePart2(String input, int expected) {
@@ -60,9 +53,10 @@ class Day09Test {
     }
 
     @Test
-    void testSolutionPart2() {
+    void testSolution() {
         String input = Utils.readLine(inputFile, Day09Test.class);
         Day09 day = Day09.fromValues(input);
+        assertEquals(17390, day.part1());
         assertEquals(7825, day.part2());
     }
 

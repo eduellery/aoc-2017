@@ -14,28 +14,17 @@ class Day06Test {
     private String fileName = "day06.in";
 
     @Test
-    void testExamplePart1() {
+    void testExample() {
         Day06 day = Day06.fromValues(List.of(0, 2, 7, 0));
         assertEquals(5, day.part1());
-    }
-
-    @Test
-    void testSolutionPart1() {
-        List<Integer> input = Utils.readLineAsIntList(fileName, Day06Test.class);
-        Day06 day = Day06.fromValues(input);
-        assertEquals(12841, day.part1());
-    }
-
-    @Test
-    void testExamplePart2() {
-        Day06 day = Day06.fromValues(List.of(0, 2, 7, 0));
         assertEquals(4, day.part2());
     }
 
     @Test
-    void testSolutionPart2() {
+    void testSolution() {
         List<Integer> input = Utils.readLineAsIntList(fileName, Day06Test.class);
         Day06 day = Day06.fromValues(input);
+        assertEquals(12841, day.part1());
         assertEquals(8038, day.part2());
     }
 

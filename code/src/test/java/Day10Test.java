@@ -14,28 +14,17 @@ class Day10Test {
     private String inputFile = "day10.in";
 
     @Test
-    void testExamplePart1() {
+    void testExample() {
         Day10 day = Day10.fromValues("3,4,1,5", 5);
         assertEquals(12, day.part1());
-    }
-
-    @Test
-    void testSolutionPart1() {
-        String input = Utils.readLine(inputFile, Day10Test.class);
-        Day10 day = Day10.fromValues(input, 256);
-        assertEquals(11413, day.part1());
-    }
-
-    @Test
-    void testExamplePart2() {
-        Day10 day = Day10.fromValues("3,4,1,5", 5);
         assertEquals("", day.part2());
     }
 
     @Test
-    void testSolutionPart2() {
+    void testSolution() {
         String input = Utils.readLine(inputFile, Day10Test.class);
         Day10 day = Day10.fromValues(input, 256);
+        assertEquals(11413, day.part1());
         assertEquals("7adfd64c2a03a4968cf708d1b7fd418d", day.part2());
     }
 
