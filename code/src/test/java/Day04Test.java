@@ -20,23 +20,17 @@ class Day04Test {
     }
 
     @Test
-    void testSolutionPart1() {
-        List<String> input = Utils.readLines(fileName, Day04Test.class);
-        Day04 day = new Day04(input);
-        assertEquals(455, day.part1());
-    }
-
-    @Test
     void testExamplePart2() {
         Day04 day = new Day04(List.of("abcde fghij", "abcde xyz ecdab", "a ab abc abd abf abj", "iiii oiii ooii oooi oooo", "oiii ioii iioi iiio"));
         assertEquals(3, day.part2());
     }
 
     @Test
-    void testSolutionPart2() {
+    void testSolution() {
         List<String> input = Utils.readLines(fileName, Day04Test.class);
         Day04 day = new Day04(input);
-        assertEquals(186, day.part2());
+        assertEquals(455, day.part1(), "Part 1");
+        assertEquals(186, day.part2(), "Part 2");
     }
 
 }

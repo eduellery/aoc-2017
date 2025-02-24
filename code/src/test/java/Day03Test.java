@@ -23,23 +23,17 @@ class Day03Test {
 
     @ParameterizedTest
     @MethodSource("provideExamples")
-    void testExamplePart1(int input, int expected) {
+    void testExamples(int input, int expected) {
         Day03 day = new Day03(input);
         assertEquals(expected, day.part1());
     }
 
     @Test
-    void testSolutionPart1() {
+    void testSolution() {
         int input = Utils.readLineAsInt(fileName, Day03Test.class);
         Day03 day = new Day03(input);
-        assertEquals(552, day.part1());
-    }
-
-    @Test
-    void testSolutionPart2() {
-        int input = Utils.readLineAsInt(fileName, Day03Test.class);
-        Day03 day = new Day03(input);
-        assertEquals(330785, day.part2());
+        assertEquals(552, day.part1(), "Part 1");
+        assertEquals(330785, day.part2(), "Part 2");
     }
 
 }
