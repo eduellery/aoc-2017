@@ -13,50 +13,29 @@ class Day11Test {
 
     private String inputFile = "day11.in";
 
-    private static Stream<Arguments> provideExamplesPart1() {
+    private static Stream<Arguments> provideExamples() {
         return Stream.of(
-            Arguments.of(List.of("ne", "ne", "ne"), 3),
-            Arguments.of(List.of("ne", "ne", "sw", "sw"), 0),
-            Arguments.of(List.of("ne", "ne", "s", "s"), 2),
-            Arguments.of(List.of("se", "sw", "se", "sw", "sw"), 3)
-        );
-    }
-
-    private static Stream<Arguments> provideExamplesPart2() {
-        return Stream.of(
-            Arguments.of(List.of("ne", "ne", "ne"), 3),
-            Arguments.of(List.of("ne", "ne", "sw", "sw"), 2),
-            Arguments.of(List.of("ne", "ne", "s", "s"), 2),
-            Arguments.of(List.of("se", "sw", "se", "sw", "sw"), 3)
+            Arguments.of(List.of("ne", "ne", "ne"), 3, 3),
+            Arguments.of(List.of("ne", "ne", "sw", "sw"), 0, 2),
+            Arguments.of(List.of("ne", "ne", "s", "s"), 2, 2),
+            Arguments.of(List.of("se", "sw", "se", "sw", "sw"), 3, 3)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("provideExamplesPart1")
-    void testExamplePart1(List<String> input, int expected) {
+    @MethodSource("provideExamples")
+    void testExample(List<String> input, int part1, int part2) {
         Day11 day = Day11.fromDirections(input);
-        assertEquals(expected, day.part1());
+        assertEquals(part1, day.part1(), "Part 1");
+        assertEquals(part2, day.part2(), "Part 2");
     }
 
     @Test
-    void testSolutionPart1() {
+    void testSolution() {
         List<String> input = Utils.readLineAsStringList(inputFile, Day11Test.class);
         Day11 day = Day11.fromDirections(input);
-        assertEquals(722, day.part1());
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideExamplesPart2")
-    void testExamplePart2(List<String> input, int expected) {
-        Day11 day = Day11.fromDirections(input);
-        assertEquals(expected, day.part2());
-    }
-
-    @Test
-    void testSolutionPart2() {
-        List<String> input = Utils.readLineAsStringList(inputFile, Day11Test.class);
-        Day11 day = Day11.fromDirections(input);
-        assertEquals(1551, day.part2());
+        assertEquals(722, day.part1(), "Part 1");
+        assertEquals(1551, day.part2(), "Part 2");
     }
 
 }

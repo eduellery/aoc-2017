@@ -18,16 +18,16 @@ class Day08Test {
     void testExample() {
         List<String> input = Utils.readLines(exampleFile, Day08Test.class);
         Day08 day = Day08.fromValues(input);
-        assertEquals(1, day.part1());
-        assertEquals(10, day.part2());
+        assertEquals(1, day.part1(), "Part 1");
+        assertEquals(10, day.part2(), "Part 2");
     }
 
     @Test
     void testSolution() {
         List<String> input = Utils.readLines(inputFile, Day08Test.class);
         Day08 day = Day08.fromValues(input);
-        assertEquals(5752, day.part1());
-        assertEquals(6366, day.part2());
+        assertEquals(5752, day.part1(), "Part 1");
+        assertEquals(6366, day.part2(), "Part 2");
     }
 
 }

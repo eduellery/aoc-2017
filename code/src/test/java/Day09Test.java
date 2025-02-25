@@ -56,8 +56,8 @@ class Day09Test {
     void testSolution() {
         String input = Utils.readLine(inputFile, Day09Test.class);
         Day09 day = Day09.fromValues(input);
-        assertEquals(17390, day.part1());
-        assertEquals(7825, day.part2());
+        assertEquals(17390, day.part1(), "Part 1");
+        assertEquals(7825, day.part2(), "Part 2");
     }
 
 }
