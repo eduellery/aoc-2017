@@ -49,7 +49,7 @@ public record Day10(int part1, String part2) {
         return new Day10(part1, part2);
     }
 
-    private static int[] sparseHash(int[] list, List<Integer> lengths, int rounds) {
+    public static int[] sparseHash(int[] list, List<Integer> lengths, int rounds) {
         int current = 0, skip = 0;
         for (int round = 0; round < rounds; round++) {
             for (int length : lengths) {
@@ -61,7 +61,7 @@ public record Day10(int part1, String part2) {
         return list;
     }
 
-    private static String denseHash(int[] sparseHash) {
+    public static String denseHash(int[] sparseHash) {
         return IntStream.range(0, 16)
                 .map(i -> Arrays.stream(sparseHash, i * 16, (i + 1) * 16).reduce((a, b) -> a ^ b).orElse(0))
                 .mapToObj(i -> String.format("%02x", i))
