@@ -23,12 +23,10 @@ public record Day10(int part1, String part2) {
     private static final List<Integer> SUFFIX = List.of(17, 31, 73, 47, 23);
 
     public static Day10 fromValues(String input, int length) {
-        // Parse lengths for Part 1
         List<Integer> lengths = Arrays.stream(input.split(","))
                 .map(Integer::parseInt)
                 .toList();
 
-        // Generate full lengths for Part 2
         List<Integer> fullLengths = Stream.concat(
                 input.chars().boxed(),
                 SUFFIX.stream()
@@ -36,14 +34,11 @@ public record Day10(int part1, String part2) {
 
         max = length;
 
-        // Compute sparse hashes
         int[] sparseHash1 = sparseHash(IntStream.range(0, max).toArray(), lengths, 1);
         int[] sparseHash2 = sparseHash(IntStream.range(0, max).toArray(), fullLengths, 64);
 
-        // Compute Part 1 result
         int part1 = sparseHash1[0] * sparseHash1[1];
 
-        // Compute Part 2 result
         String part2 = sparseHash1.length < 16 ? "" : denseHash(sparseHash2);
 
         return new Day10(part1, part2);

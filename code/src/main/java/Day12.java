@@ -24,7 +24,6 @@ public record Day12(int part1, int part2) {
     public static Day12 fromLines(List<String> lines) {
         Map<Integer, Set<Integer>> nodeMap = new HashMap<>();
 
-        // Build the graph
         for (String line : lines) {
             String[] parts = line.split(" <-> ");
             int node = Integer.parseInt(parts[0]);
@@ -35,10 +34,8 @@ public record Day12(int part1, int part2) {
             nodeMap.put(node, connections);
         }
 
-        // Part 1: Find the size of the group containing node 0
         Set<Integer> groupZero = bfsGroup(0, nodeMap);
 
-        // Part 2: Count the number of unique groups
         Set<Set<Integer>> groups = new HashSet<>();
         Set<Integer> visited = new HashSet<>();
 

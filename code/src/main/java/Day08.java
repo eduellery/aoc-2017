@@ -18,7 +18,6 @@ import java.util.stream.IntStream;
 
 public record Day08(int part1, int part2) {
 
-    // Define comparison operations using BiPredicate
     private static Map<String, BiPredicate<Integer, Integer>> comparisons = Map.of(
         "==", Integer::equals,
         "!=", (x, y) -> !x.equals(y),
@@ -28,7 +27,6 @@ public record Day08(int part1, int part2) {
         ">=", (x, y) -> x >= y
     );
 
-    // Define increment/decrement commands using ToIntBiFunction
     private static Map<String, ToIntBiFunction<Integer, Integer>> commands = Map.of(
         "inc", Integer::sum,
         "dec", (x, y) -> x - y
