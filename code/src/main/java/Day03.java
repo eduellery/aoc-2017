@@ -35,7 +35,7 @@ public record Day03(int part1, int part2) {
             input--;
         }
 
-        return MathUtils.getManhattanDistance(pos.x(), pos.y());
+        return getManhattanDistance(pos.x(), pos.y());
     };
 
     private static int solvePart2(int input) {
@@ -71,6 +71,10 @@ public record Day03(int part1, int part2) {
         return pos.neighbors().stream()
             .mapToInt(neighbor -> values.getOrDefault(neighbor, 0))
             .sum();
+    }
+
+    private static int getManhattanDistance(int x, int y) {
+        return Math.abs(x) + Math.abs(y);
     }
 
     private enum Direction {
