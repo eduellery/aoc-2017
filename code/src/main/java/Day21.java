@@ -33,8 +33,7 @@ public record Day21(int part1, int part2) {
             String[] arr = line.split(" => ");
             rules.add(new Rule(arr));
         }
-        String[] image = new String[]{".#.", "..#", "###"};
-        boolean[][] pattern = strArrayToBooleanArrays(image);
+        boolean[][] pattern = strArrayToBoolArrays(new String[]{".#.", "..#", "###"});
         pattern = run(rules, pattern, initialLoops);
         int part1 = count(pattern);
         pattern = run(rules, pattern, extraLoops);
@@ -42,19 +41,18 @@ public record Day21(int part1, int part2) {
         return new Day21(part1, part2);
     }
 
-    private static boolean[][] run(List<Rule> rules, boolean[][] pattern, int iterations) {
-        for (int iter = 0; iter < iterations; iter++) {
+    private static boolean[][] run(List<Rule> rules, boolean[][] pattern, int loops) {
+        for (int i = 0; i < loops; i++) {
             int size = pattern.length;
             int ss = (size % 2 == 0) ? 2 : 3;
             int ns = ss + 1;
             int newSize = size / ss * ns;
             boolean[][] newPattern = new boolean[newSize][newSize];
-
-            for (int r = 0; r < size / ss; r++) {
-                for (int c = 0; c < size / ss; c++) {
-                    boolean[][] square = getSquare(pattern, r, c, ss);
+            for (int row = 0; row < size / ss; row++) {
+                for (int column = 0; column < size / ss; column++) {
+                    boolean[][] square = getSquare(pattern, row, column, ss);
                     boolean[][] transformed = transform(rules, square);
-                    putSquare(newPattern, r, c, transformed);
+                    putSquare(newPattern, row, column, transformed);
                 }
             }
             pattern = newPattern;
@@ -63,13 +61,13 @@ public record Day21(int part1, int part2) {
     }
 
     private static int count(boolean[][] pattern) {
-        int cnt = 0;
+        int counter = 0;
         for (boolean[] row : pattern) {
             for (boolean cell : row) {
-                if (cell) cnt++;
+                if (cell) counter++;
             }
         }
-        return cnt;
+        return counter;
     }
 
     private static boolean[][] transform(List<Rule> rules, boolean[][] square) {
@@ -79,26 +77,26 @@ public record Day21(int part1, int part2) {
         throw new IllegalStateException("No matching rule found");
     }
 
-    private static boolean[][] getSquare(boolean[][] pattern, int r, int c, int ss) {
-        boolean[][] sq = new boolean[ss][ss];
-        int y = r * ss;
-        int x = c * ss;
-        for (int i = 0; i < ss; i++) {
-            System.arraycopy(pattern[y + i], x, sq[i], 0, ss);
+    private static boolean[][] getSquare(boolean[][] pattern, int row, int column, int squareSize) {
+        boolean[][] square = new boolean[squareSize][squareSize];
+        int y = row * squareSize;
+        int x = column * squareSize;
+        for (int i = 0; i < squareSize; i++) {
+            System.arraycopy(pattern[y + i], x, square[i], 0, squareSize);
         }
-        return sq;
+        return square;
     }
 
-    private static void putSquare(boolean[][] pattern, int r, int c, boolean[][] sq) {
-        int ss = sq.length;
-        int y = r * ss;
-        int x = c * ss;
-        for (int i = 0; i < ss; i++) {
-            System.arraycopy(sq[i], 0, pattern[y + i], x, ss);
+    private static void putSquare(boolean[][] pattern, int row, int column, boolean[][] square) {
+        int squareSize = square.length;
+        int y = row * squareSize;
+        int x = column * squareSize;
+        for (int i = 0; i < squareSize; i++) {
+            System.arraycopy(square[i], 0, pattern[y + i], x, squareSize);
         }
     }
 
-    static private boolean[][] strArrayToBooleanArrays(String[] strArr) {
+    static private boolean[][] strArrayToBoolArrays(String[] strArr) {
         boolean[][] boolArr = new boolean[strArr.length][];
         for (int i = 0; i < strArr.length; i++) {
             boolArr[i] = new boolean[strArr[i].length()];
@@ -111,66 +109,66 @@ public record Day21(int part1, int part2) {
 
     static private class Rule {
         boolean[][] source, target;
-        ArrayList<boolean[][]> srcs;
+        ArrayList<boolean[][]> sources;
 
         public Rule(String[] arr) {
-            source = strArrayToBooleanArrays(arr[0].split("/"));
+            source = strArrayToBoolArrays(arr[0].split("/"));
+            target = strArrayToBoolArrays(arr[1].split("/"));
             initSources();
-            target = strArrayToBooleanArrays(arr[1].split("/"));
         }
 
         private void initSources() {
-            srcs = new ArrayList<>();
-            srcs.add(source);
-            boolean[][] s = source;
+            sources = new ArrayList<>();
+            sources.add(source);
+            boolean[][] newSource = source;
             for (int i = 0; i < 3; i++) {
-                s = rotate(s);
-                srcs.add(s);
+                newSource = rotate(newSource);
+                sources.add(newSource);
             }
-            s = flip(source);
-            srcs.add(s);
+            newSource = flip(source);
+            sources.add(newSource);
             for (int i = 0; i < 3; i++) {
-                s = rotate(s);
-                srcs.add(s);
+                newSource = rotate(newSource);
+                sources.add(newSource);
             }
         }
 
         public boolean matches(boolean[][] square) {
             if (square.length != source.length) return false;
-            for (boolean[][] src : srcs) {
-                if (match(square, src)) return true;
+            for (boolean[][] source : sources) {
+                if (match(square, source)) return true;
             }
             return false;
         }
 
-        private boolean match(boolean[][] square, boolean[][] src) {
-            int l = square.length;
-            for (int r = 0; r < l; r++) {
-                if (!java.util.Arrays.equals(square[r], src[r])) return false;
+        private boolean match(boolean[][] square, boolean[][] source) {
+            int length = square.length;
+            for (int row = 0; row < length; row++) {
+                if (!java.util.Arrays.equals(square[row], source[row])) return false;
             }
             return true;
         }
 
         private boolean[][] flip(boolean[][] square) {
-            int l = square.length;
-            boolean[][] res = new boolean[l][l];
-            for (int r = 0; r < l; r++) {
-                for (int c = 0; c < l; c++) {
-                    res[r][l - c - 1] = square[r][c];
+            int length = square.length;
+            boolean[][] result = new boolean[length][length];
+            for (int row = 0; row < length; row++) {
+                for (int column = 0; column < length; column++) {
+                    result[row][length - column - 1] = square[row][column];
                 }
             }
-            return res;
+            return result;
         }
 
         private boolean[][] rotate(boolean[][] square) {
-            int l = square.length;
-            boolean[][] res = new boolean[l][l];
-            for (int r = 0; r < l; r++) {
-                for (int c = 0; c < l; c++) {
-                    res[c][l - r - 1] = square[r][c];
+            int length = square.length;
+            boolean[][] result = new boolean[length][length];
+            for (int row = 0; row < length; row++) {
+                for (int column = 0; column < length; column++) {
+                    result[column][length - row - 1] = square[row][column];
                 }
             }
-            return res;
+            return result;
         }
     }
 }
