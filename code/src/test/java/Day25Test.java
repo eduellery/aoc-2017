@@ -17,16 +17,16 @@ class Day25Test {
 
     @Test
     void testExample() {
-        List<String> input = Utils.readLines(exampleFile, Day25Test.class);
-        Day25 day = Day25.checksum(true);
+        String input = Utils.read(exampleFile, Day25Test.class);
+        Day25 day = Day25.checksum(input);
         assertEquals(3, day.part1(), "Part 1");
         assertEquals(0, day.part2(), "Part 2");
     }
 
     @Test
     void testSolution() {
-        List<String> input = Utils.readLines(inputFile, Day25Test.class);
-        Day25 day = Day25.checksum(false);
+        String input = Utils.read(inputFile, Day25Test.class);
+        Day25 day = Day25.checksum(input);
         assertEquals(3145, day.part1(), "Part 1");
         assertEquals(0, day.part2(), "Part 2");
     }

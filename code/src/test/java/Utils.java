@@ -45,4 +45,8 @@ public class Utils {
         return Arrays.asList(readLine(fileName, clazz).split(","));
     }
 
+    public static String read(String fileName, Class<?> clazz) {
+        return readLines(fileName, clazz).stream().collect(Collectors.joining("\n"));
+    }
+
 }
