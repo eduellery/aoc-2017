@@ -49,7 +49,7 @@ public record Day19(String part1, int part2) {
                 case N -> j--;
                 case S -> j++;
                 case E -> i++;
-                case W -> i--;
+                default -> i--;
             }
 
             Orientation newOrientation = handleNext(matrix, result, matrix[j][i], i, j, orientation);
@@ -77,7 +77,7 @@ public record Day19(String part1, int part2) {
     private static Orientation changeOrientation(char[][] matrix, int i, int j, Orientation orientation) {
         return switch (orientation) {
             case N, S -> (matrix[j][i + 1] == SPACE) ? Orientation.W : Orientation.E;
-            case E, W -> (matrix[j + 1][i] == SPACE) ? Orientation.N : Orientation.S;
+            default -> (matrix[j + 1][i] == SPACE) ? Orientation.N : Orientation.S;
         };
     }
 

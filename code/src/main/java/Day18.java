@@ -34,7 +34,8 @@ public record Day18(int part1, int part2) {
         BigInteger lastSound = null;
         List<BigInteger> soundsPlayed = new ArrayList<>();
 
-        for (int i = 0; i < instructions.size(); ) {
+        int i = 0;
+        while (i < instructions.size()) {
             String[] parts = instructions.get(i).split(" ");
             String cmd = parts[0];
             char reg = parts[1].charAt(0);
@@ -50,10 +51,11 @@ public record Day18(int part1, int part2) {
                 case "rcv" -> {
                     if (registers.get(reg).compareTo(BigInteger.ZERO) > 0) {
                         lastSound = soundsPlayed.get(soundsPlayed.size() - 1);
-                        return lastSound.intValue();
+                        i = instructions.size();
+                        continue;
                     }
                 }
-                case "jgz" -> {
+                default -> {
                     if (getValue(parts[1], registers).compareTo(BigInteger.ZERO) > 0) {
                         i += getValue(parts[2], registers).intValue();
                         continue;
@@ -131,7 +133,7 @@ public record Day18(int part1, int part2) {
         }
 
         public boolean isHalted() {
-            return instructionPointer < 0 || instructionPointer >= instructions.size();
+            return instructionPointer < 0;
         }
 
         public void processInstructions() {
@@ -148,7 +150,7 @@ public record Day18(int part1, int part2) {
                 case "mul" -> registers.put(reg, registers.get(reg).multiply(getValue(parts[2], registers)));
                 case "mod" -> registers.put(reg, registers.get(reg).mod(getValue(parts[2], registers)));
                 case "rcv" -> registers.put(reg, pullFromQueue());
-                case "jgz" -> {
+                default -> {
                     if (getValue(parts[1], registers).compareTo(BigInteger.ZERO) > 0) {
                         instructionPointer += getValue(parts[2], registers).intValue();
                         return;

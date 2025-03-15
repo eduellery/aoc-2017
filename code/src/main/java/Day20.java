@@ -100,8 +100,6 @@ public record Day20(int part1, int part2) {
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj) return true;
-            if (obj == null || getClass() != obj.getClass()) return false;
             Particle p = (Particle) obj;
             return positions.get(0) == p.positions.get(0) && positions.get(1) == p.positions.get(1) && positions.get(2) == p.positions.get(2);
         }

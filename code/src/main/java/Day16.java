@@ -36,15 +36,19 @@ public record Day16(String part1, String part2) {
         Map<String, Integer> seen = new HashMap<>();
         List<String> states = new ArrayList<>();
 
-        for (int i = 0; i < iterations; i++) {
+        int i = 0;
+        while (i < iterations) {
             if (seen.containsKey(dancers)) {
                 int cycleLength = i - seen.get(dancers);
                 int remaining = (iterations - i) % cycleLength;
-                return states.get(seen.get(dancers) + remaining);
+                dancers = states.get(seen.get(dancers) + remaining);
+                i = iterations;
+                continue;
             }
             seen.put(dancers, i);
             states.add(dancers);
             dancers = moveDancers(dancers, danceMoves);
+            i++;
         }
         return dancers;
     }
@@ -65,7 +69,7 @@ public record Day16(String part1, String part2) {
                     String[] parts = move.substring(1).split("/");
                     danceMoves.add(new DanceMove(DanceMove.Type.X, -1, Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), null, null));
                 }
-                case 'p' -> {
+                default -> {
                     String[] parts = move.substring(1).split("/");
                     danceMoves.add(new DanceMove(DanceMove.Type.P, -1, -1, -1, parts[0], parts[1]));
                 }
@@ -82,7 +86,7 @@ public record Day16(String part1, String part2) {
             return switch (type) {
                 case S -> swap(dancers, dancers.length() - index);
                 case X -> swap(dancers, source, target);
-                case P -> swap(dancers, dancers.indexOf(partnerA), dancers.indexOf(partnerB));
+                default -> swap(dancers, dancers.indexOf(partnerA), dancers.indexOf(partnerB));
             };
         }
 

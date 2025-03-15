@@ -48,7 +48,7 @@ public record Day23(long part1, long part2) {
                 case "set" -> registers.put(parts[1], deref(parts[2]));
                 case "sub" -> registers.put(parts[1], deref(parts[1]) - deref(parts[2]));
                 case "mul" -> registers.put(parts[1], deref(parts[1]) * deref(parts[2]));
-                case "jnz" -> {
+                default -> {
                     if (deref(parts[1]) != 0) {
                         pc += (int) deref(parts[2]) - 1;
                     }

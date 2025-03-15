@@ -67,14 +67,12 @@ public record Day25(long part1, long part2) {
         Map<String, Transition> transitions = new HashMap<>();
 
         Matcher initStateMatcher = INIT_STATE_PATTERN.matcher(text);
-        if (initStateMatcher.find()) {
-            initialState = State.valueOf(initStateMatcher.group(1));
-        }
+        initStateMatcher.find();
+        initialState = State.valueOf(initStateMatcher.group(1));
 
         Matcher stepMatcher = STEP_PATTERN.matcher(text);
-        if (stepMatcher.find()) {
-            steps = Integer.parseInt(stepMatcher.group(1));
-        }
+        stepMatcher.find();
+        steps = Integer.parseInt(stepMatcher.group(1));
 
         Matcher matcher = STATE_PATTERN.matcher(text);
         while (matcher.find()) {
