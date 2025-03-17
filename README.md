@@ -64,6 +64,8 @@ ADD JAVA REFACTORING TEXT HERE
 
 ### Advent of Code 2017 Final Art
 
+![Advent of Code 2017 Final Art](doc/aoc2017.png "Advent of Code 2017 Final Art")
+
 [^disclaimer]: **Disclaimer**: I do AoC for fun and to learn new languages and new tricks. Part of my learning process (also for fun, even if I
 already have experience with some language), is to check what other users do and learn things from them. I can't help but incorporate
 their cool, clean, concise ideas into my code. Sometimes their code is *so* much better than mine that I end up replacing my whole code!
