@@ -8,7 +8,12 @@ My answers for Advent of Code 2017.[^disclaimer]
 
 ### Language, Libraries and Frameworks
 
-TBD
+Language of choice: [Java](https://en.wikipedia.org/wiki/Java_(programming_language))
+
+* [Java 17 - History of Java](https://en.wikipedia.org/wiki/Java_(software_platform)#Java_versions)
+* [Gradle](https://gradle.org/)
+* [JUnit](https://junit.org/)
+* [JaCoCo](https://www.eclemma.org/jacoco/)
 
 ### History
 
