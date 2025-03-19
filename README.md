@@ -17,9 +17,9 @@ Language of choice: [Java](https://en.wikipedia.org/wiki/Java_(programming_langu
 
 ### History
 
-I actually started Advent of Code in 2017 using Java. I decided to do the previous 2 years (2015, 2016) in Python to practice a bit and because it is the go-to language used by most of the competitive programmers that I follow. Don't get me wrong here, I'm _super slow_, but it does not prevent me from enjoying these incredibly fast programmers and watch them solve things. I'm here for the fun of it, not to win any contest. :smile:
+I actually started Advent of Code in 2017 using Java. I decided to do the previous 2 years (2015, 2016) in Python to practice a bit and continued with relative consistency, choosing different languages each year. Unfortunately, I lost most of my 2017 solutions, and the files I was able to recover were a mess. Back then, I wasn’t focused on writing clean, maintainable code or exploring clever tricks — my only goal was to solve the “puzzle of the day” and throw away the code.
 
-ADD JAVA REFACTORING TEXT HERE
+Since I decided to keep repos for all AoC editions, I came back to it and refactored my solutions using the latest version I had gotten acquainted with: Java 17. It also felt like a fitting choice for 2017.
 
 ### Previous Editions
 
