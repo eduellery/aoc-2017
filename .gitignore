@@ -31,3 +31,4 @@ build
 
 .aocsession
 *.in
+.DS_Store
