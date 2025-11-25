@@ -30,5 +30,6 @@ replay_pid*
 build
 
 .aocsession
+.java-version
 *.in
 .DS_Store
