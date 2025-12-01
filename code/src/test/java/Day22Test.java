@@ -1,13 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class Day22Test {
@@ -16,17 +17,15 @@ class Day22Test {
 
     private static Stream<Arguments> provideExamplesPart1() {
         return Stream.of(
-            Arguments.of(List.of("..#", "#..", "..."), 7, 5),
-            Arguments.of(List.of("..#", "#..", "..."), 70, 41),
-            Arguments.of(List.of("..#", "#..", "..."), 10000, 5587)
-        );
+                Arguments.of(List.of("..#", "#..", "..."), 7, 5),
+                Arguments.of(List.of("..#", "#..", "..."), 70, 41),
+                Arguments.of(List.of("..#", "#..", "..."), 10000, 5587));
     }
 
     private static Stream<Arguments> provideExamplesPart2() {
         return Stream.of(
-            Arguments.of(List.of("..#", "#..", "..."), 100, 26),
-            Arguments.of(List.of("..#", "#..", "..."), 10000000, 2511944)
-        );
+                Arguments.of(List.of("..#", "#..", "..."), 100, 26),
+                Arguments.of(List.of("..#", "#..", "..."), 10000000, 2511944));
     }
 
     @ParameterizedTest
@@ -51,5 +50,4 @@ class Day22Test {
         assertEquals(5348, easyVirus.infected(), "Part 1");
         assertEquals(2512225, hardVirus.infected(), "Part 2");
     }
-
 }

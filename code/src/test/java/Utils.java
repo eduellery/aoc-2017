@@ -8,7 +8,9 @@ public class Utils {
 
     public static List<String> readLines(String fileName, Class<?> clazz) {
         try (InputStream inputStream = clazz.getResourceAsStream(fileName);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                BufferedReader reader =
+                        new BufferedReader(
+                                new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             return reader.lines().toList();
         } catch (IOException | NullPointerException e) {
             throw new RuntimeException("Error reading the file: " + fileName, e);
@@ -48,5 +50,4 @@ public class Utils {
     public static String read(String fileName, Class<?> clazz) {
         return readLines(fileName, clazz).stream().collect(Collectors.joining("\n"));
     }
-
 }

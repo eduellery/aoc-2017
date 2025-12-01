@@ -1,38 +1,13 @@
-import java.math.BigInteger;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.IntSummaryStatistics;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Queue;
-import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.ToIntBiFunction;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public record Day24(long part1, long part2) {
 
     public static Day24 build(List<String> input) {
         List<Component> components = new ArrayList<>(input.size());
         for (String value : input) {
-            int[] val = Arrays.stream(value.split("/"))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+            int[] val = Arrays.stream(value.split("/")).mapToInt(Integer::parseInt).toArray();
             components.add(new Component(val[0], val[1]));
         }
 
@@ -88,8 +63,9 @@ public record Day24(long part1, long part2) {
                     items.add(node);
                     node.build(remaining, next, longest);
                     if (longest) {
-                        if (node.maxPosition > maxPosition || 
-                            (node.maxPosition == maxPosition && node.strength > maxStrength)) {
+                        if (node.maxPosition > maxPosition
+                                || (node.maxPosition == maxPosition
+                                        && node.strength > maxStrength)) {
                             maxPosition = node.maxPosition;
                             maxStrength = node.strength;
                         }

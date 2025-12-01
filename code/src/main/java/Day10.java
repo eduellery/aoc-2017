@@ -1,18 +1,5 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.IntSummaryStatistics;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.ToIntBiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -23,14 +10,9 @@ public record Day10(int part1, String part2) {
     private static final List<Integer> SUFFIX = List.of(17, 31, 73, 47, 23);
 
     public static Day10 fromValues(String input, int length) {
-        List<Integer> lengths = Arrays.stream(input.split(","))
-                .map(Integer::parseInt)
-                .toList();
+        List<Integer> lengths = Arrays.stream(input.split(",")).map(Integer::parseInt).toList();
 
-        List<Integer> fullLengths = Stream.concat(
-                input.chars().boxed(),
-                SUFFIX.stream()
-        ).toList();
+        List<Integer> fullLengths = Stream.concat(input.chars().boxed(), SUFFIX.stream()).toList();
 
         max = length;
 
@@ -58,7 +40,11 @@ public record Day10(int part1, String part2) {
 
     public static String denseHash(int[] sparseHash) {
         return IntStream.range(0, 16)
-                .map(i -> Arrays.stream(sparseHash, i * 16, (i + 1) * 16).reduce((a, b) -> a ^ b).orElse(0))
+                .map(
+                        i ->
+                                Arrays.stream(sparseHash, i * 16, (i + 1) * 16)
+                                        .reduce((a, b) -> a ^ b)
+                                        .orElse(0))
                 .mapToObj(i -> String.format("%02x", i))
                 .collect(Collectors.joining());
     }

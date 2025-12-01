@@ -1,11 +1,5 @@
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public record Day04(int part1, int part2) {
 
@@ -14,10 +8,8 @@ public record Day04(int part1, int part2) {
     }
 
     private static int solve(List<String> input, Predicate<List<String>> validator) {
-        return (int) input.stream()
-                .map(line -> List.of(line.split("\\s+")))
-                .filter(validator)
-                .count();
+        return (int)
+                input.stream().map(line -> List.of(line.split("\\s+"))).filter(validator).count();
     }
 
     private static boolean isValidPwd1(List<String> words) {
@@ -25,12 +17,18 @@ public record Day04(int part1, int part2) {
     }
 
     private static boolean isValidPwd2(List<String> words) {
-        return words.size() == words.stream()
-                .map(word -> word.chars()
-                        .sorted()
-                        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                        .toString())
-                .distinct()
-                .count();
+        return words.size()
+                == words.stream()
+                        .map(
+                                word ->
+                                        word.chars()
+                                                .sorted()
+                                                .collect(
+                                                        StringBuilder::new,
+                                                        StringBuilder::appendCodePoint,
+                                                        StringBuilder::append)
+                                                .toString())
+                        .distinct()
+                        .count();
     }
 }

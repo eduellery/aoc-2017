@@ -1,23 +1,7 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.IntSummaryStatistics;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Queue;
-import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.ToIntBiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public record Day14(int part1, int part2) {
 
@@ -36,8 +20,11 @@ public record Day14(int part1, int part2) {
 
     private static int[] generateIntHashes(List<String> hashes) {
         return hashes.stream()
-            .flatMapToInt(hash -> hash.chars().map(c -> Integer.parseInt(String.valueOf((char) c), 16)))
-            .toArray();
+                .flatMapToInt(
+                        hash ->
+                                hash.chars()
+                                        .map(c -> Integer.parseInt(String.valueOf((char) c), 16)))
+                .toArray();
     }
 
     private static int countGroups(int[] values) {
@@ -83,20 +70,18 @@ public record Day14(int part1, int part2) {
     }
 
     private static List<String> generateHashes(String input) {
-        return IntStream.range(0, SIZE)
-                .mapToObj(i -> computeKnotHash(input + "-" + i))
-                .toList();
+        return IntStream.range(0, SIZE).mapToObj(i -> computeKnotHash(input + "-" + i)).toList();
     }
 
     private static String computeKnotHash(String input) {
         int[] lengths = Arrays.copyOf(input.chars().toArray(), input.length() + SUFFIX.length);
         System.arraycopy(SUFFIX, 0, lengths, lengths.length - SUFFIX.length, SUFFIX.length);
 
-        int[] nums = Day10.sparseHash(
-            IntStream.range(0, 256).toArray(),
-            Arrays.stream(lengths).boxed().collect(Collectors.toList()),
-            64
-        );
+        int[] nums =
+                Day10.sparseHash(
+                        IntStream.range(0, 256).toArray(),
+                        Arrays.stream(lengths).boxed().collect(Collectors.toList()),
+                        64);
 
         return Day10.denseHash(nums);
     }

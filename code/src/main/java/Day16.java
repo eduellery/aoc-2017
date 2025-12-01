@@ -1,23 +1,7 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.IntSummaryStatistics;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Queue;
-import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.ToIntBiFunction;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public record Day16(String part1, String part2) {
 
@@ -32,7 +16,8 @@ public record Day16(String part1, String part2) {
         return new Day16(part1, dancers);
     }
 
-    private static String performDancesWithMemoization(String dancers, List<DanceMove> danceMoves, int iterations) {
+    private static String performDancesWithMemoization(
+            String dancers, List<DanceMove> danceMoves, int iterations) {
         Map<String, Integer> seen = new HashMap<>();
         List<String> states = new ArrayList<>();
 
@@ -64,10 +49,25 @@ public record Day16(String part1, String part2) {
         List<DanceMove> danceMoves = new ArrayList<>();
         for (String move : moves) {
             switch (move.charAt(0)) {
-                case 's' -> danceMoves.add(new DanceMove(DanceMove.Type.S, Integer.parseInt(move.substring(1)), -1, -1, null, null));
+                case 's' ->
+                        danceMoves.add(
+                                new DanceMove(
+                                        DanceMove.Type.S,
+                                        Integer.parseInt(move.substring(1)),
+                                        -1,
+                                        -1,
+                                        null,
+                                        null));
                 case 'x' -> {
                     String[] parts = move.substring(1).split("/");
-                    danceMoves.add(new DanceMove(DanceMove.Type.X, -1, Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), null, null));
+                    danceMoves.add(
+                            new DanceMove(
+                                    DanceMove.Type.X,
+                                    -1,
+                                    Integer.parseInt(parts[0]),
+                                    Integer.parseInt(parts[1]),
+                                    null,
+                                    null));
                 }
                 default -> {
                     String[] parts = move.substring(1).split("/");
@@ -78,9 +78,14 @@ public record Day16(String part1, String part2) {
         return danceMoves;
     }
 
-    private record DanceMove(Type type, int index, int source, int target, String partnerA, String partnerB) {
+    private record DanceMove(
+            Type type, int index, int source, int target, String partnerA, String partnerB) {
 
-        enum Type { S, X, P }
+        enum Type {
+            S,
+            X,
+            P
+        }
 
         public String apply(String dancers) {
             return switch (type) {

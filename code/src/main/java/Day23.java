@@ -1,10 +1,6 @@
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public record Day23(long part1, long part2) {
@@ -25,7 +21,9 @@ public record Day23(long part1, long part2) {
     }
 
     private static boolean isPrime(int num) {
-        return (num < 2) ? false : IntStream.rangeClosed(2, (int) Math.sqrt(num)).noneMatch(i -> num % i == 0);
+        return (num < 2)
+                ? false
+                : IntStream.rangeClosed(2, (int) Math.sqrt(num)).noneMatch(i -> num % i == 0);
     }
 
     private static class Machine {

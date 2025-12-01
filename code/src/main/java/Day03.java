@@ -1,10 +1,6 @@
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public record Day03(int part1, int part2) {
 
@@ -36,7 +32,8 @@ public record Day03(int part1, int part2) {
         }
 
         return getManhattanDistance(pos.x(), pos.y());
-    };
+    }
+    ;
 
     private static int solvePart2(int input) {
         Map<Position, Integer> values = new HashMap<>();
@@ -65,12 +62,13 @@ public record Day03(int part1, int part2) {
         }
 
         return value;
-    };
+    }
+    ;
 
     private static int setValue(Map<Position, Integer> values, Position pos) {
         return pos.neighbors().stream()
-            .mapToInt(neighbor -> values.getOrDefault(neighbor, 0))
-            .sum();
+                .mapToInt(neighbor -> values.getOrDefault(neighbor, 0))
+                .sum();
     }
 
     private static int getManhattanDistance(int x, int y) {
@@ -78,7 +76,10 @@ public record Day03(int part1, int part2) {
     }
 
     private enum Direction {
-        RIGHT, UP, LEFT, DOWN;
+        RIGHT,
+        UP,
+        LEFT,
+        DOWN;
 
         public Position move(Position pos) {
             return switch (this) {
@@ -93,15 +94,14 @@ public record Day03(int part1, int part2) {
     private record Position(int x, int y) {
         public List<Position> neighbors() {
             return List.of(
-                new Position(x - 1, y - 1),
-                new Position(x, y - 1),
-                new Position(x + 1, y - 1),
-                new Position(x - 1, y),
-                new Position(x + 1, y),
-                new Position(x - 1, y + 1),
-                new Position(x, y + 1),
-                new Position(x + 1, y + 1)
-            );
+                    new Position(x - 1, y - 1),
+                    new Position(x, y - 1),
+                    new Position(x + 1, y - 1),
+                    new Position(x - 1, y),
+                    new Position(x + 1, y),
+                    new Position(x - 1, y + 1),
+                    new Position(x, y + 1),
+                    new Position(x + 1, y + 1));
         }
     }
 }

@@ -1,29 +1,5 @@
-import java.math.BigInteger;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.IntSummaryStatistics;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Queue;
-import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.ToIntBiFunction;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public record Day21(int part1, int part2) {
 
@@ -33,7 +9,7 @@ public record Day21(int part1, int part2) {
             String[] arr = line.split(" => ");
             rules.add(new Rule(arr));
         }
-        boolean[][] pattern = strArrayToBoolArrays(new String[]{".#.", "..#", "###"});
+        boolean[][] pattern = strArrayToBoolArrays(new String[] {".#.", "..#", "###"});
         pattern = run(rules, pattern, initialLoops);
         int part1 = count(pattern);
         pattern = run(rules, pattern, extraLoops);
@@ -96,7 +72,7 @@ public record Day21(int part1, int part2) {
         }
     }
 
-    static private boolean[][] strArrayToBoolArrays(String[] strArr) {
+    private static boolean[][] strArrayToBoolArrays(String[] strArr) {
         boolean[][] boolArr = new boolean[strArr.length][];
         for (int i = 0; i < strArr.length; i++) {
             boolArr[i] = new boolean[strArr[i].length()];
@@ -107,7 +83,7 @@ public record Day21(int part1, int part2) {
         return boolArr;
     }
 
-    static private class Rule {
+    private static class Rule {
         boolean[][] source, target;
         ArrayList<boolean[][]> sources;
 

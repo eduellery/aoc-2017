@@ -1,27 +1,4 @@
-import java.math.BigInteger;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.IntSummaryStatistics;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Queue;
-import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.ToIntBiFunction;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public record Day19(String part1, int part2) {
 
@@ -30,7 +7,12 @@ public record Day19(String part1, int part2) {
     private static final char CROSS = '+';
     private static final char SPACE = ' ';
 
-    private enum Orientation { N, S, E, W }
+    private enum Orientation {
+        N,
+        S,
+        E,
+        W
+    }
 
     public static Day19 traverseDiagram(List<String> diagram) {
         return collectChars(diagram, getFirstColumn(diagram));
@@ -52,7 +34,8 @@ public record Day19(String part1, int part2) {
                 default -> i--;
             }
 
-            Orientation newOrientation = handleNext(matrix, result, matrix[j][i], i, j, orientation);
+            Orientation newOrientation =
+                    handleNext(matrix, result, matrix[j][i], i, j, orientation);
             if (newOrientation == null) {
                 finished = true;
             } else {
@@ -62,7 +45,8 @@ public record Day19(String part1, int part2) {
         return new Day19(result.toString(), count);
     }
 
-    private static Orientation handleNext(char[][] matrix, StringBuilder result, char c, int i, int j, Orientation orientation) {
+    private static Orientation handleNext(
+            char[][] matrix, StringBuilder result, char c, int i, int j, Orientation orientation) {
         return switch (c) {
             case CROSS -> changeOrientation(matrix, i, j, orientation);
             case HORIZONTAL, VERTICAL -> orientation;
@@ -74,7 +58,8 @@ public record Day19(String part1, int part2) {
         };
     }
 
-    private static Orientation changeOrientation(char[][] matrix, int i, int j, Orientation orientation) {
+    private static Orientation changeOrientation(
+            char[][] matrix, int i, int j, Orientation orientation) {
         return switch (orientation) {
             case N, S -> (matrix[j][i + 1] == SPACE) ? Orientation.W : Orientation.E;
             default -> (matrix[j + 1][i] == SPACE) ? Orientation.N : Orientation.S;

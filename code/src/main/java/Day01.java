@@ -26,5 +26,4 @@ public record Day01(int part1, int part2) {
                 .map(i -> digits[i])
                 .sum();
     }
-
 }

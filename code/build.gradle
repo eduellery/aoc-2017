@@ -1,6 +1,7 @@
 plugins {
     id 'application'
     id 'jacoco'
+    id 'com.diffplug.spotless' version '8.1.0'
 }
 
 repositories {
@@ -48,5 +49,35 @@ tasks.jacocoTestReport {
         xml.required = true
         csv.required = true
         html.required = true
+    }
+}
+
+spotless {
+    java {
+        target 'src/**/*.java'
+
+        googleJavaFormat('1.22.0')
+                .reflowLongStrings()
+                .groupArtifact('com.google.googlejavaformat:google-java-format')
+                .aosp()
+
+        removeUnusedImports()
+        importOrder 'java', 'javax', 'org', 'com', ''
+
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    groovy {
+        target 'src/**/*.groovy'
+        greclipse()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    format 'misc', {
+        target '*.md', '.gitignore', '.editorconfig'
+        trimTrailingWhitespace()
+        endWithNewline()
     }
 }

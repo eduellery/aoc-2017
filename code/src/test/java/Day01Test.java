@@ -1,11 +1,13 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.stream.Stream;
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class Day01Test {
@@ -14,21 +16,19 @@ class Day01Test {
 
     private static Stream<Arguments> provideExamplesPart1() {
         return Stream.of(
-            Arguments.of("1122", 3),
-            Arguments.of("1111", 4),
-            Arguments.of("1234", 0),
-            Arguments.of("91212129", 9)
-        );
+                Arguments.of("1122", 3),
+                Arguments.of("1111", 4),
+                Arguments.of("1234", 0),
+                Arguments.of("91212129", 9));
     }
 
     private static Stream<Arguments> provideExamplesPart2() {
         return Stream.of(
-            Arguments.of("1212", 6),
-            Arguments.of("1221", 0),
-            Arguments.of("123425", 4),
-            Arguments.of("123123", 12),
-            Arguments.of("12131415", 4)
-        );
+                Arguments.of("1212", 6),
+                Arguments.of("1221", 0),
+                Arguments.of("123425", 4),
+                Arguments.of("123123", 12),
+                Arguments.of("12131415", 4));
     }
 
     @ParameterizedTest
@@ -52,5 +52,4 @@ class Day01Test {
         assertEquals(1343, day.part1(), "Part 1");
         assertEquals(1274, day.part2(), "Part 2");
     }
-
 }

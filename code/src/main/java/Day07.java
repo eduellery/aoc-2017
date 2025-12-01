@@ -1,17 +1,10 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.IntSummaryStatistics;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public record Day07(String part1, int part2) {
 
@@ -36,7 +29,8 @@ public record Day07(String part1, int part2) {
             }
         }
 
-        String rootName = all.stream().filter(name -> !nonRoot.contains(name)).findFirst().orElseThrow();
+        String rootName =
+                all.stream().filter(name -> !nonRoot.contains(name)).findFirst().orElseThrow();
         Disc root = discs.get(rootName);
 
         return new Day07(rootName, fixedValue(root));
@@ -52,12 +46,12 @@ public record Day07(String part1, int part2) {
         }
 
         int incorrectWeight = parent.getTotalWeight();
-        int correctWeight = grandpa.getChildren()
-                .stream()
-                .filter(d -> d.getTotalWeight() != incorrectWeight)
-                .findFirst()
-                .orElseThrow()
-                .getTotalWeight();
+        int correctWeight =
+                grandpa.getChildren().stream()
+                        .filter(d -> d.getTotalWeight() != incorrectWeight)
+                        .findFirst()
+                        .orElseThrow()
+                        .getTotalWeight();
 
         return parent.getWeight() + (correctWeight - incorrectWeight);
     }
@@ -68,10 +62,12 @@ public record Day07(String part1, int part2) {
                 .entrySet()
                 .stream()
                 .filter(e -> e.getValue() == 1)
-                .map(e -> disc.getChildren().stream()
-                        .filter(d -> d.getTotalWeight() == e.getKey())
-                        .findFirst()
-                        .orElse(null))
+                .map(
+                        e ->
+                                disc.getChildren().stream()
+                                        .filter(d -> d.getTotalWeight() == e.getKey())
+                                        .findFirst()
+                                        .orElse(null))
                 .findFirst()
                 .orElse(null);
     }
